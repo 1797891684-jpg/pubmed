@@ -9,10 +9,38 @@ st.set_page_config(page_title="AI纳米医学文献速览", page_icon="🧬", la
 # 🔥 强行注入 CSS，彻底隐藏 Streamlit 所有官方标识（菜单、页脚、彩虹条）
 hide_streamlit_style = """
             <style>
-            #MainMenu {visibility: hidden;}       /* 隐藏右上角主菜单 */
-            footer {visibility: hidden;}          /* 隐藏底部 Made with Streamlit */
-            header {visibility: hidden;}          /* 隐藏顶部彩虹装饰条 */
-            .stDeployButton {display:none;}       /* 隐藏右上角的 Deploy 按钮 */
+            /* 1. 物理移除右上角主菜单 */
+            #MainMenu, [data-testid="stSidebarUserActions"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* 2. 物理移除底部页脚 (Made with Streamlit) 专治微信乱顶 */
+            footer, [data-testid="stFooter"] {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0px !important;
+                position: absolute !important;
+                bottom: -9999px !important; /* 哪怕微信想顶，也只能顶到屏幕外一万像素去 */
+            }
+            
+            /* 3. 彻底拍扁顶部彩虹装饰条 */
+            header, [data-testid="stHeader"] {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0px !important;
+            }
+            
+            /* 4. 移除右上角的内置 Deploy 按钮 */
+            .stDeployButton, div[class*="stDeployButton"] {
+                display: none !important;
+            }
+            
+            /* 5. 调整移动端和微信端的间距缩进 */
+            .block-container {
+                padding-top: 1rem !important;
+                padding-bottom: 0rem !important;
+            }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
