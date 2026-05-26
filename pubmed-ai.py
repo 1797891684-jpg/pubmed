@@ -28,21 +28,29 @@ hide_streamlit_style = """
                 visibility: hidden !important;
             }
             
-            /* 4. 🔥【核心对症下药】彻底摧毁微信端/移动端特有的红色悬浮红标、小纸船和绿色头像 */
-            [data-testid="stAppToolbar"], 
-            div[class*="stAppViewer"], 
-            div[class*="stDecoration"], 
+            /* 4. 🔥【全新大招】只要 class 名字里包含 Viewer、Badge、Footer、Toolbar、Decoration 的浮动容器，通通蒸发 */
             div[class*="ViewerBadge"],
-            .stApp [style*="bottom"] {
+            div[class*="stAppViewer"],
+            div[class*="stDecoration"],
+            div[class*="stAppToolbar"],
+            div[class*="stFooter"],
+            footer[class*="stFooter"] {
                 display: none !important;
                 visibility: hidden !important;
                 height: 0px !important;
                 width: 0px !important;
                 opacity: 0 !important;
-                pointer-events: none !important;
             }
             
-            /* 5. 调整整体页面间距，消除底部空白 */
+            /* 5. 🔥【兜底大招】强行封死页面最底部的 absolute 和 fixed 悬浮层（防止微信强行顶起） */
+            .stApp div[style*="position: absolute"], 
+            .stApp div[style*="position: fixed"] {
+                /* 只要检测到在底部且包含特殊标记，就直接隐藏 */
+                pointer-events: none !important;
+                display: none !important;
+            }
+            
+            /* 6. 极致优化页面内衬，防止底部留白 */
             .block-container {
                 padding-top: 1rem !important;
                 padding-bottom: 0rem !important;
