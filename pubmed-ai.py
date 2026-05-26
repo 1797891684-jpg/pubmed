@@ -4,8 +4,7 @@ from openai import OpenAI
 
 # ==================== 1. 网页基础配置与引流看板 ====================
 st.set_page_config(page_title="AI纳米医学文献速览", page_icon="🧬", layout="wide")
-# ==================== 网页基础配置与引流看板 ====================
-st.set_page_config(page_title="AI纳米医学文献速览", page_icon="🧬", layout="wide")
+
 
 # 🔥 强行注入 CSS，彻底隐藏 Streamlit 所有官方标识（菜单、页脚、彩虹条）
 hide_streamlit_style = """
