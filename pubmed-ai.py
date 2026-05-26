@@ -64,7 +64,7 @@ with st.sidebar:
     st.title("🔑 助手配置中心")
 
     # 隐私输入 API Key
-    user_key = st.text_input("输入国产大模型 API Key", type="password", help="可在智谱AI、DeepSeek等平台免费申请")
+    user_key = st.text_input("请输入国产大模型 API Key", type="password", help="可在智谱AI、DeepSeek等平台免费申请")
     provider = st.selectbox("选择模型供应商", ["智谱 AI (GLM)", "DeepSeek", "通义千问"])
 
     st.markdown("---")
