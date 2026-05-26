@@ -9,34 +9,40 @@ st.set_page_config(page_title="AI纳米医学文献速览", page_icon="🧬", la
 # 🔥 强行注入 CSS，彻底隐藏 Streamlit 所有官方标识（菜单、页脚、彩虹条）
 hide_streamlit_style = """
             <style>
-            /* 1. 物理移除右上角主菜单 */
-            #MainMenu, [data-testid="stSidebarUserActions"] {
-                display: none !important;
-                visibility: hidden !important;
-            }
-            
-            /* 2. 物理移除底部页脚 (Made with Streamlit) 专治微信乱顶 */
-            footer, [data-testid="stFooter"] {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0px !important;
-                position: absolute !important;
-                bottom: -9999px !important; /* 哪怕微信想顶，也只能顶到屏幕外一万像素去 */
-            }
-            
-            /* 3. 彻底拍扁顶部彩虹装饰条 */
+            /* 1. 拍扁顶部彩虹装饰条 */
             header, [data-testid="stHeader"] {
                 display: none !important;
                 visibility: hidden !important;
                 height: 0px !important;
             }
             
-            /* 4. 移除右上角的内置 Deploy 按钮 */
-            .stDeployButton, div[class*="stDeployButton"] {
+            /* 2. 彻底拔除右上角主菜单和部署按钮 */
+            #MainMenu, [data-testid="stSidebarUserActions"], .stDeployButton, div[class*="stDeployButton"] {
                 display: none !important;
+                visibility: hidden !important;
             }
             
-            /* 5. 调整移动端和微信端的间距缩进 */
+            /* 3. 斩草除根：移除电脑端常规页脚 */
+            footer, [data-testid="stFooter"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* 4. 🔥【核心对症下药】彻底摧毁微信端/移动端特有的红色悬浮红标、小纸船和绿色头像 */
+            [data-testid="stAppToolbar"], 
+            div[class*="stAppViewer"], 
+            div[class*="stDecoration"], 
+            div[class*="ViewerBadge"],
+            .stApp [style*="bottom"] {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0px !important;
+                width: 0px !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            
+            /* 5. 调整整体页面间距，消除底部空白 */
             .block-container {
                 padding-top: 1rem !important;
                 padding-bottom: 0rem !important;
